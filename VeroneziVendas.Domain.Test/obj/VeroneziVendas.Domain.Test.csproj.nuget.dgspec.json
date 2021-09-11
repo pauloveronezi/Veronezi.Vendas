@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projetos\\Veronezi.Vendas\\src\\VeroneziVendas.Domain.Test\\VeroneziVendas.Domain.Test.csproj": {}
+    "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain.Test\\VeroneziVendas.Domain.Test.csproj": {}
   },
   "projects": {
-    "C:\\Projetos\\Veronezi.Vendas\\src\\VeroneziVendas.Domain.Test\\VeroneziVendas.Domain.Test.csproj": {
+    "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain.Test\\VeroneziVendas.Domain.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projetos\\Veronezi.Vendas\\src\\VeroneziVendas.Domain.Test\\VeroneziVendas.Domain.Test.csproj",
+        "projectUniqueName": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain.Test\\VeroneziVendas.Domain.Test.csproj",
         "projectName": "VeroneziVendas.Domain.Test",
-        "projectPath": "C:\\Projetos\\Veronezi.Vendas\\src\\VeroneziVendas.Domain.Test\\VeroneziVendas.Domain.Test.csproj",
+        "projectPath": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain.Test\\VeroneziVendas.Domain.Test.csproj",
         "packagesPath": "C:\\Users\\paulo\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\Veronezi.Vendas\\src\\VeroneziVendas.Domain.Test\\obj\\",
+        "outputPath": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain.Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\paulo\\AppData\\Roaming\\NuGet\\NuGet.Config",

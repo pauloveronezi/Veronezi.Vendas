@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projetos\\Veronezi.Vendas\\src\\VeroneziVendas.Application\\VeroneziVendas.Application.csproj": {}
+    "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Application\\VeroneziVendas.Application.csproj": {}
   },
   "projects": {
-    "C:\\Projetos\\Veronezi.Vendas\\src\\VeroneziVendas.Application\\VeroneziVendas.Application.csproj": {
+    "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Application\\VeroneziVendas.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projetos\\Veronezi.Vendas\\src\\VeroneziVendas.Application\\VeroneziVendas.Application.csproj",
+        "projectUniqueName": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Application\\VeroneziVendas.Application.csproj",
         "projectName": "VeroneziVendas.Application",
-        "projectPath": "C:\\Projetos\\Veronezi.Vendas\\src\\VeroneziVendas.Application\\VeroneziVendas.Application.csproj",
+        "projectPath": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Application\\VeroneziVendas.Application.csproj",
         "packagesPath": "C:\\Users\\paulo\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\Veronezi.Vendas\\src\\VeroneziVendas.Application\\obj\\",
+        "outputPath": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\paulo\\AppData\\Roaming\\NuGet\\NuGet.Config",

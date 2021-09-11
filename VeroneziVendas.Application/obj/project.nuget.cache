@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "j31Oc/Sda53Z4ny5OgTKwGl6FPJ1ngEBzuldwVQE31Asey/7lRO7CDXttE6Tj0xqY2hDZAgIwsmXyHn69taUKg==",
+  "dgSpecHash": "0D2wN+elClcMuoNxKIygUBS+5DyZj/wBIYsVULOQAE0rcwfPIua4AwvSLP8ibHmJXPUgDL0unw4EZQWdQ7PUcg==",
   "success": true,
-  "projectFilePath": "C:\\Projetos\\Veronezi.Vendas\\src\\VeroneziVendas.Application\\VeroneziVendas.Application.csproj",
+  "projectFilePath": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Application\\VeroneziVendas.Application.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
