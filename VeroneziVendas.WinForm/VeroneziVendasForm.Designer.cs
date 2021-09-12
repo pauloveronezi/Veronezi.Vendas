@@ -1,7 +1,7 @@
 ﻿
 namespace VeroneziVendas.WinForm
 {
-    partial class Form1
+    partial class VeroneziVendasForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,13 +29,30 @@ namespace VeroneziVendas.WinForm
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
+            // VeroneziVendasForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Name = "VeroneziVendasForm";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }
 
