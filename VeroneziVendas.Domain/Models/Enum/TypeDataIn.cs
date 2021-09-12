@@ -2,7 +2,7 @@
 
 namespace VeroneziVendas.Domain.Models.Enum
 {
-    public enum TypeData
+    public enum TypeDataIn
     {
         [Description("Vendedor")]
         Vendedor = 001,
