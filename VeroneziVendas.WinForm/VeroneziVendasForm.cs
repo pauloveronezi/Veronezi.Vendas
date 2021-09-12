@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace VeroneziVendas.WinForm
 {
-    public partial class Form1 : Form
+    public partial class VeroneziVendasForm : Form
     {
-        public Form1()
+        public VeroneziVendasForm()
         {
             InitializeComponent();
         }
