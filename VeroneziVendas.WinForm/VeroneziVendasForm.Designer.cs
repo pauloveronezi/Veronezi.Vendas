@@ -45,6 +45,7 @@ namespace VeroneziVendas.WinForm
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "VeroneziVendasForm";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.VeroneziVendasForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
 

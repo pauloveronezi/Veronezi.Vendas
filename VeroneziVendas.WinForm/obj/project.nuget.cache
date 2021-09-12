@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "pEfIhHdpptYEDe4EKcUyke8oBxF1fRgoex1qnsKJMhkFm7W0GFi2a0Yd6aLBZKiZCN+xF3JsEpIKXqrvg6q2Jw==",
+  "dgSpecHash": "hmvMjhoipZI44XcI9Iot4K+ZqZI3E/VkYyYTjMFurCK1vddCR8+HPx3JZauJXwhutYGQVTI0ddA/MKatSuheew==",
   "success": true,
   "projectFilePath": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.WinForm\\VeroneziVendas.WinForm.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\paulo\\.nuget\\packages\\fluentvalidation\\10.3.3\\fluentvalidation.10.3.3.nupkg.sha512"
+  ],
   "logs": []
 }
