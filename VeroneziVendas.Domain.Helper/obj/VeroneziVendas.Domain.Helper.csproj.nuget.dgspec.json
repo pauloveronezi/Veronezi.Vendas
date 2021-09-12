@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain\\VeroneziVendas.Domain.csproj": {}
+    "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain.Helper\\VeroneziVendas.Domain.Helper.csproj": {}
   },
   "projects": {
-    "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain\\VeroneziVendas.Domain.csproj": {
+    "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain.Helper\\VeroneziVendas.Domain.Helper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain\\VeroneziVendas.Domain.csproj",
-        "projectName": "VeroneziVendas.Domain",
-        "projectPath": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain\\VeroneziVendas.Domain.csproj",
+        "projectUniqueName": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain.Helper\\VeroneziVendas.Domain.Helper.csproj",
+        "projectName": "VeroneziVendas.Domain.Helper",
+        "projectPath": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain.Helper\\VeroneziVendas.Domain.Helper.csproj",
         "packagesPath": "C:\\Users\\paulo\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain\\obj\\",
+        "outputPath": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Domain.Helper\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\paulo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,12 +39,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "dependencies": {
-            "FluentValidation": {
-              "target": "Package",
-              "version": "[10.3.3, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
