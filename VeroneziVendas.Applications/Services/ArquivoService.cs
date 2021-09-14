@@ -34,9 +34,9 @@ namespace VeroneziVendas.Applications.Services
                 {
                     _vendedores.Add(new Vendedor
                     {
-                        CPF = _linhaSplit[1].RemoveSimbolos(),
+                        CPF = StringHelper.RemoveSimbolos(_linhaSplit[1]),
                         Name = _linhaSplit[2],
-                        Salary = _linhaSplit[3],
+                        Salary = Convert.ToDecimal(_linhaSplit[3].Replace(",", "."), new CultureInfo("en-US")),
                     });
                 }
 
@@ -44,7 +44,7 @@ namespace VeroneziVendas.Applications.Services
                 {
                     _clientes.Add(new Cliente
                     {
-                        CNPJ = _linhaSplit[1].RemoveSimbolos(),
+                        CNPJ = StringHelper.RemoveSimbolos(_linhaSplit[1]),
                         Name = _linhaSplit[2],
                         BusinessArea = _linhaSplit[3],
                     });
@@ -93,13 +93,13 @@ namespace VeroneziVendas.Applications.Services
 
             try
             {
-                using (var fs = File.Create($"{_diretorio}\\.data\\out\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyhhmmss}out.txt")}"))
+                using (var fs = File.Create($"{_diretorio}\\.data\\out\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyHHmmss}out.txt")}"))
                 {
                     byte[] info = new UTF8Encoding(true).GetBytes(dataOut);
                     fs.Write(info, 0, info.Length);
                 }
 
-                File.Move($"{_diretorio}\\.data\\in\\{arquivo.Nome}", $"{_diretorio}\\.data\\processed\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyhhmmss}processed.txt")}");
+                File.Move($"{_diretorio}\\.data\\in\\{arquivo.Nome}", $"{_diretorio}\\.data\\processed\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyHHmmss}processed.txt")}");
             }
             catch (Exception)
             {
@@ -113,12 +113,18 @@ namespace VeroneziVendas.Applications.Services
         {
             var _quantidadeClientes = arquivo.ClienteList.ToList().Count;
             var _quantidadeVendedores = arquivo.VendedorList.ToList().Count;
-            var _vendaMaisCara = arquivo.VendaList.Where(x => x.ValorVenda == arquivo.VendaList.Max(x => x.ValorVenda)).Select(x => x.Id).SingleOrDefault();
-
-            var _somaVendas = arquivo.VendaList.GroupBy(g => new { g.Vendedor.Name, g.ValorVenda })
-                                .Select(s => new { s.Key.Name, Vendas = s.Sum(w => w.ValorVenda) })
-                                .ToList();
-            var _piorVendedor = _somaVendas.Where(x => x.Vendas == _somaVendas.Min(x => x.Vendas)).Select(x => x.Name).SingleOrDefault();
+            var _vendaMaisCara = arquivo.VendaList
+                                        .Where(x => x.ValorVenda == arquivo.VendaList.Max(x => x.ValorVenda))
+                                        .Select(x => x.Id)
+                                        .SingleOrDefault();
+            var _somaVendas = arquivo.VendaList
+                                     .GroupBy(g => new { g.Vendedor.Name, g.ValorVenda })
+                                     .Select(s => new { s.Key.Name, Vendas = s.Sum(w => w.ValorVenda) })
+                                     .ToList();
+            var _piorVendedor = _somaVendas
+                                    .Where(x => x.Vendas == _somaVendas.Min(x => x.Vendas))
+                                    .Select(x => x.Name)
+                                    .SingleOrDefault();
 
             var _dataOut = $"{TypeDataOut.Out001}ç{_quantidadeClientes}ç{_quantidadeVendedores}ç{_vendaMaisCara}ç{_piorVendedor}";
 

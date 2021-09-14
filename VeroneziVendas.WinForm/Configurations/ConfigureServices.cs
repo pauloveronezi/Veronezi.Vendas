@@ -11,7 +11,7 @@ namespace VeroneziVendas.WinForm.Configurations
             services.AddScoped<VeroneziVendasForm>();
 
             services.AddScoped<IArquivoService, ArquivoService>();
-            services.AddScoped<IDiretorioService, DiretorioService>();            
+            services.AddScoped<IDiretorioService, DiretorioService>();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using VeroneziVendas.Applications.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using System.Threading;
 
 namespace VeroneziVendas.WinForm
 {
@@ -28,6 +29,7 @@ namespace VeroneziVendas.WinForm
 
         private void WatcherFiles_Created(object sender, FileSystemEventArgs e)
         {
+            Thread.Sleep(5000);
             var _arquivo = _ServiceArquivo.Ler(e);
             _ServiceArquivo.Processar(_arquivo);            
         }
