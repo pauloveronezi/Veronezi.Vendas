@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using VeroneziVendas.Applications.Interfaces;
 
 namespace VeroneziVendas.Applications.Services
@@ -6,6 +8,11 @@ namespace VeroneziVendas.Applications.Services
     public class DiretorioService : IDiretorioService
     {
         private readonly DirectoryInfo _diretorio = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent;
+
+        public DiretorioService(IServiceProvider serviceProvider)
+        {
+
+        }
 
         public void Criar()
         {
@@ -39,6 +46,13 @@ namespace VeroneziVendas.Applications.Services
             {
                 Directory.CreateDirectory(_diretorioProcessed);
             }
+        }
+
+        public IEnumerable<string> ListarArquivos()
+        {
+            var _arquivosIn = Directory.GetFiles(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent + "\\.data\\in");
+
+            return _arquivosIn;
         }
 
         public DirectoryInfo Recuperar()

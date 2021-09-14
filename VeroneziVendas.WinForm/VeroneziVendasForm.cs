@@ -1,33 +1,34 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using VeroneziVendas.Applications.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace VeroneziVendas.WinForm
 {
     public partial class VeroneziVendasForm : Form
     {
+        private readonly IArquivoService _ServiceArquivo;
         private readonly IDiretorioService _ServiceDiretorio;
 
-        public VeroneziVendasForm(IDiretorioService diretorioService)
+        public VeroneziVendasForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            
-            _ServiceDiretorio = diretorioService;
+
+            _ServiceArquivo = serviceProvider.GetService<IArquivoService>();
+            _ServiceDiretorio = serviceProvider.GetService<IDiretorioService>();
         }
 
         private void VeroneziVendasForm_Load(object sender, System.EventArgs e)
         {
-            var _teste = _ServiceDiretorio.Recuperar();
+            _ServiceDiretorio.Criar();
+            watcherFiles.Path = $"{_ServiceDiretorio.Recuperar().FullName}\\.data\\in";
         }
 
         private void watcherFiles_Created(object sender, FileSystemEventArgs e)
         {
-            throw new System.NotSupportedException();
+            var _arquivo = _ServiceArquivo.Ler(e);
+            _ServiceArquivo.Processar(_arquivo);
         }
-
-        private void watcherFiles_Changed(object sender, FileSystemEventArgs e)
-        {
-            throw new System.NotSupportedException();
-        }        
     }
 }

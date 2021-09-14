@@ -54,7 +54,6 @@ namespace VeroneziVendas.WinForm
             this.watcherFiles.EnableRaisingEvents = true;
             this.watcherFiles.Filter = "*.txt";
             this.watcherFiles.SynchronizingObject = this;
-            this.watcherFiles.Changed += new System.IO.FileSystemEventHandler(this.watcherFiles_Changed);
             this.watcherFiles.Created += new System.IO.FileSystemEventHandler(this.watcherFiles_Created);
             // 
             // gboxIn
