@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeroneziVendas.Domain", "Ve
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeroneziVendas.Domain.Test", "VeroneziVendas.Domain.Test\VeroneziVendas.Domain.Test.csproj", "{C782E191-1507-44DF-94DF-C4A1ADCC7D39}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeroneziVendas.Application", "VeroneziVendas.Application\VeroneziVendas.Application.csproj", "{5ECB4B43-FB58-42B0-AB27-22C99A04AAEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeroneziVendas.Applications", "VeroneziVendas.Applications\VeroneziVendas.Applications.csproj", "{5ECB4B43-FB58-42B0-AB27-22C99A04AAEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeroneziVendas.Domain.Helper", "VeroneziVendas.Domain.Helper\VeroneziVendas.Domain.Helper.csproj", "{1F9A9E48-2794-4F6B-8396-95080507FF6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeroneziVendas.Domain.Helper", "VeroneziVendas.Domain.Helper\VeroneziVendas.Domain.Helper.csproj", "{1F9A9E48-2794-4F6B-8396-95080507FF6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

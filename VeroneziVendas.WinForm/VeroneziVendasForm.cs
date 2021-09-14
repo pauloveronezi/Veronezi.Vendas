@@ -1,21 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
+using VeroneziVendas.Applications.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading;
 
 namespace VeroneziVendas.WinForm
 {
     public partial class VeroneziVendasForm : Form
     {
-        public VeroneziVendasForm()
+        private readonly IArquivoService _ServiceArquivo;
+        private readonly IDiretorioService _ServiceDiretorio;
+
+        public VeroneziVendasForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+
+            _ServiceArquivo = serviceProvider.GetService<IArquivoService>();
+            _ServiceDiretorio = serviceProvider.GetService<IDiretorioService>();
         }
 
+        private void VeroneziVendasForm_Load(object sender, System.EventArgs e)
+        {
+            _ServiceDiretorio.Criar();
+            WatcherFiles.Path = $"{_ServiceDiretorio.Recuperar().FullName}\\.data\\in";
+            TimerFiles.Start();
+        }
+
+        private void WatcherFiles_Created(object sender, FileSystemEventArgs e)
+        {
+            Thread.Sleep(3000);
+            var _arquivo = _ServiceArquivo.Ler(e);
+            _ServiceArquivo.Processar(_arquivo);            
+        }
+
+        private void TimerFiles_Tick(object sender, EventArgs e)
+        {
+            InformarLocalArquivos();
+        }
+
+        private void InformarLocalArquivos()
+        {
+            dgvIn.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\in");
+            dgvOut.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\out");
+            dgvError.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\error");
+            dgvProcessed.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\processed");
+        }        
     }
 }

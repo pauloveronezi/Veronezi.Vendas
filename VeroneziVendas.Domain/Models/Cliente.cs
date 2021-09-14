@@ -1,6 +1,6 @@
 ﻿namespace VeroneziVendas.Domain.Models
 {
-    public class Cliente : Entity
+    public class Cliente
     {
         public string CNPJ { get; set; }
 

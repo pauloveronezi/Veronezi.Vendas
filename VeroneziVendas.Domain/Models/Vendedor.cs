@@ -1,11 +1,11 @@
 ﻿namespace VeroneziVendas.Domain.Models
 {
-    public class Vendedor : Entity
+    public class Vendedor
     {
         public string CPF { get; set; }
 
         public string Name { get; set; }
 
-        public string Salary { get; set; }
+        public decimal? Salary { get; set; }
     }
 }
