@@ -9,7 +9,7 @@ namespace VeroneziVendas.Applications.Services
     {
         private readonly DirectoryInfo _diretorio = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent;
 
-        public DiretorioService(IServiceProvider serviceProvider)
+        public DiretorioService()
         {
 
         }
