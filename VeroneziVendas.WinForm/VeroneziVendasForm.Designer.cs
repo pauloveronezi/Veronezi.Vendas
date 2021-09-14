@@ -68,18 +68,34 @@ namespace VeroneziVendas.WinForm
             // 
             // dgvIn
             // 
+            this.dgvIn.AllowUserToAddRows = false;
+            this.dgvIn.AllowUserToDeleteRows = false;
+            this.dgvIn.AllowUserToResizeColumns = false;
+            this.dgvIn.AllowUserToResizeRows = false;
+            this.dgvIn.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvIn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvIn.ColumnHeadersVisible = false;
             this.dgvIn.Location = new System.Drawing.Point(6, 22);
             this.dgvIn.Name = "dgvIn";
+            this.dgvIn.ReadOnly = true;
+            this.dgvIn.RowHeadersVisible = false;
             this.dgvIn.RowTemplate.Height = 25;
             this.dgvIn.Size = new System.Drawing.Size(438, 222);
             this.dgvIn.TabIndex = 0;
             // 
             // dgvOut
             // 
+            this.dgvOut.AllowUserToAddRows = false;
+            this.dgvOut.AllowUserToDeleteRows = false;
+            this.dgvOut.AllowUserToResizeColumns = false;
+            this.dgvOut.AllowUserToResizeRows = false;
+            this.dgvOut.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOut.ColumnHeadersVisible = false;
             this.dgvOut.Location = new System.Drawing.Point(6, 22);
             this.dgvOut.Name = "dgvOut";
+            this.dgvOut.ReadOnly = true;
+            this.dgvOut.RowHeadersVisible = false;
             this.dgvOut.RowTemplate.Height = 25;
             this.dgvOut.Size = new System.Drawing.Size(438, 222);
             this.dgvOut.TabIndex = 0;
@@ -106,9 +122,17 @@ namespace VeroneziVendas.WinForm
             // 
             // dgvError
             // 
+            this.dgvError.AllowUserToAddRows = false;
+            this.dgvError.AllowUserToDeleteRows = false;
+            this.dgvError.AllowUserToResizeColumns = false;
+            this.dgvError.AllowUserToResizeRows = false;
+            this.dgvError.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvError.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvError.ColumnHeadersVisible = false;
             this.dgvError.Location = new System.Drawing.Point(6, 22);
             this.dgvError.Name = "dgvError";
+            this.dgvError.ReadOnly = true;
+            this.dgvError.RowHeadersVisible = false;
             this.dgvError.RowTemplate.Height = 25;
             this.dgvError.Size = new System.Drawing.Size(438, 222);
             this.dgvError.TabIndex = 0;
@@ -125,9 +149,17 @@ namespace VeroneziVendas.WinForm
             // 
             // dgvProcessed
             // 
+            this.dgvProcessed.AllowUserToAddRows = false;
+            this.dgvProcessed.AllowUserToDeleteRows = false;
+            this.dgvProcessed.AllowUserToResizeColumns = false;
+            this.dgvProcessed.AllowUserToResizeRows = false;
+            this.dgvProcessed.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProcessed.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProcessed.ColumnHeadersVisible = false;
             this.dgvProcessed.Location = new System.Drawing.Point(6, 22);
             this.dgvProcessed.Name = "dgvProcessed";
+            this.dgvProcessed.ReadOnly = true;
+            this.dgvProcessed.RowHeadersVisible = false;
             this.dgvProcessed.RowTemplate.Height = 25;
             this.dgvProcessed.Size = new System.Drawing.Size(438, 222);
             this.dgvProcessed.TabIndex = 0;

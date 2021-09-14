@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using VeroneziVendas.Applications.Interfaces;
+using VeroneziVendas.Domain.Models;
 
 namespace VeroneziVendas.Applications.Services
 {
@@ -48,11 +49,16 @@ namespace VeroneziVendas.Applications.Services
             }
         }
 
-        public IEnumerable<string> ListarArquivos()
+        public List<string> ListarArquivos(string complementoDiretorio)
         {
-            var _arquivosIn = Directory.GetFiles(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent + "\\.data\\in");
+            var _arquivos = new List<string>();
 
-            return _arquivosIn;
+            foreach (var arquivo in new DirectoryInfo($"{_diretorio}{complementoDiretorio}").GetFiles())
+            {
+                _arquivos.Add(arquivo.Name);
+            }
+
+            return _arquivos;
         }
 
         public DirectoryInfo Recuperar()

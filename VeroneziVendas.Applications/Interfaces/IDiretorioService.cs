@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using VeroneziVendas.Domain.Models;
 
 namespace VeroneziVendas.Applications.Interfaces
 {
@@ -7,5 +9,7 @@ namespace VeroneziVendas.Applications.Interfaces
         void Criar();
 
         DirectoryInfo Recuperar();
+
+        List<string> ListarArquivos(string complementoDiretorio);
     }
 }
