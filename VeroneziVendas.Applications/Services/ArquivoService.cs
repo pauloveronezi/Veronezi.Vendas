@@ -115,10 +115,10 @@ namespace VeroneziVendas.Applications.Services
             var _quantidadeVendedores = arquivo.VendedorList.ToList().Count;
             var _vendaMaisCara = arquivo.VendaList.Where(x => x.ValorVenda == arquivo.VendaList.Max(x => x.ValorVenda)).Select(x => x.Id).SingleOrDefault();
 
-            var _teste = arquivo.VendaList.GroupBy(g => new { g.Vendedor.Name, g.ValorVenda })
+            var _somaVendas = arquivo.VendaList.GroupBy(g => new { g.Vendedor.Name, g.ValorVenda })
                                 .Select(s => new { s.Key.Name, Vendas = s.Sum(w => w.ValorVenda) })
                                 .ToList();
-            var _piorVendedor = _teste.Where(x => x.Vendas == _teste.Min(x => x.Vendas)).Select(x => x.Name).SingleOrDefault();
+            var _piorVendedor = _somaVendas.Where(x => x.Vendas == _somaVendas.Min(x => x.Vendas)).Select(x => x.Name).SingleOrDefault();
 
             var _dataOut = $"{TypeDataOut.Out001}ç{_quantidadeClientes}ç{_quantidadeVendedores}ç{_vendaMaisCara}ç{_piorVendedor}";
 
