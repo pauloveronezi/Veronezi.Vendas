@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "hmvMjhoipZI44XcI9Iot4K+ZqZI3E/VkYyYTjMFurCK1vddCR8+HPx3JZauJXwhutYGQVTI0ddA/MKatSuheew==",
+  "dgSpecHash": "8WFppcfnSEyuMqNNNkq70Zl7kJalYvNrBNYHhXYk8ekkK+r3oUN+JPkFXBrkOFIWtx/NqtXFGEDokFI/fS+GLg==",
   "success": true,
   "projectFilePath": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.WinForm\\VeroneziVendas.WinForm.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\paulo\\.nuget\\packages\\fluentvalidation\\10.3.3\\fluentvalidation.10.3.3.nupkg.sha512"
+    "C:\\Users\\paulo\\.nuget\\packages\\fluentvalidation\\10.3.3\\fluentvalidation.10.3.3.nupkg.sha512",
+    "C:\\Users\\paulo\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\paulo\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.2\\microsoft.extensions.dependencyinjection.5.0.2.nupkg.sha512",
+    "C:\\Users\\paulo\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\paulo\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

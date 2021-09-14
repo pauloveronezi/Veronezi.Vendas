@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using VeroneziVendas.Application.Interfaces;
+using VeroneziVendas.Applications.Interfaces;
 
-namespace VeroneziVendas.Application.Services
+namespace VeroneziVendas.Applications.Services
 {
     public class DiretorioService : IDiretorioService
     {

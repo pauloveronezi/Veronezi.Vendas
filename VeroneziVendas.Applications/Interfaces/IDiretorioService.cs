@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace VeroneziVendas.Application.Interfaces
+namespace VeroneziVendas.Applications.Interfaces
 {
     public interface IDiretorioService
     {

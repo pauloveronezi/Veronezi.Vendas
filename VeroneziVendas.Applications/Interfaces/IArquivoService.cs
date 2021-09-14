@@ -1,4 +1,4 @@
-﻿namespace VeroneziVendas.Application.Interfaces
+﻿namespace VeroneziVendas.Applications.Interfaces
 {
     public interface IArquivoService
     {

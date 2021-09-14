@@ -1,27 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Windows.Forms;
-using VeroneziVendas.Domain.Helper;
-using VeroneziVendas.Domain.Models;
-using VeroneziVendas.Domain.Models.Enum;
+using VeroneziVendas.Applications.Interfaces;
 
 namespace VeroneziVendas.WinForm
 {
     public partial class VeroneziVendasForm : Form
     {
-        public VeroneziVendasForm()
+        private readonly IDiretorioService _ServiceDiretorio;
+
+        public VeroneziVendasForm(IDiretorioService diretorioService)
         {
             InitializeComponent();
+            
+            _ServiceDiretorio = diretorioService;
         }
 
         private void VeroneziVendasForm_Load(object sender, System.EventArgs e)
         {
-            
-
+            var _teste = _ServiceDiretorio.Recuperar();
         }
+
+        private void watcherFiles_Created(object sender, FileSystemEventArgs e)
+        {
+            throw new System.NotSupportedException();
+        }
+
+        private void watcherFiles_Changed(object sender, FileSystemEventArgs e)
+        {
+            throw new System.NotSupportedException();
+        }        
     }
 }

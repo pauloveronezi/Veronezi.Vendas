@@ -4,12 +4,12 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using VeroneziVendas.Application.Interfaces;
+using VeroneziVendas.Applications.Interfaces;
 using VeroneziVendas.Domain.Helper;
 using VeroneziVendas.Domain.Models;
 using VeroneziVendas.Domain.Models.Enum;
 
-namespace VeroneziVendas.Application.Services
+namespace VeroneziVendas.Applications.Services
 {
     public class ArquivoService : IArquivoService
     {
@@ -29,7 +29,7 @@ namespace VeroneziVendas.Application.Services
                     {
                         _vendedores.Add(new Vendedor
                         {
-                            CPF = StringHelper.RemoveSimbolos(_linhaSplit[1]),
+                            CPF = _linhaSplit[1].RemoveSimbolos(),
                             Name = _linhaSplit[2],
                             Salary = _linhaSplit[3],
                         });
@@ -39,7 +39,7 @@ namespace VeroneziVendas.Application.Services
                     {
                         _clientes.Add(new Cliente
                         {
-                            CNPJ = StringHelper.RemoveSimbolos(_linhaSplit[1]),
+                            CNPJ = _linhaSplit[1].RemoveSimbolos(),
                             Name = _linhaSplit[2],
                             BusinessArea = _linhaSplit[3],
                         });
@@ -69,7 +69,7 @@ namespace VeroneziVendas.Application.Services
                         });
                     }
                 }
-            }            
+            }
         }
 
         public void Processar()
