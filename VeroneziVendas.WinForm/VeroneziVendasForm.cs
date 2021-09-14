@@ -24,7 +24,7 @@ namespace VeroneziVendas.WinForm
         {
             _ServiceDiretorio.Criar();
             WatcherFiles.Path = $"{_ServiceDiretorio.Recuperar().FullName}\\.data\\in";
-            InformarLocalArquivos();
+            TimerFiles.Start();
         }
 
         private void WatcherFiles_Created(object sender, FileSystemEventArgs e)
@@ -34,12 +34,17 @@ namespace VeroneziVendas.WinForm
             _ServiceArquivo.Processar(_arquivo);            
         }
 
+        private void TimerFiles_Tick(object sender, EventArgs e)
+        {
+            InformarLocalArquivos();
+        }
+
         private void InformarLocalArquivos()
         {
             dgvIn.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\in");
             dgvOut.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\out");
             dgvError.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\error");
             dgvProcessed.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\processed");
-        }
+        }        
     }
 }

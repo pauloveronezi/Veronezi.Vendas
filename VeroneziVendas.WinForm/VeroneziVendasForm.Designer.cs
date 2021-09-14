@@ -29,6 +29,7 @@ namespace VeroneziVendas.WinForm
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.WatcherFiles = new System.IO.FileSystemWatcher();
             this.gboxIn = new System.Windows.Forms.GroupBox();
             this.dgvIn = new System.Windows.Forms.DataGridView();
@@ -38,6 +39,7 @@ namespace VeroneziVendas.WinForm
             this.dgvError = new System.Windows.Forms.DataGridView();
             this.gboxProcessed = new System.Windows.Forms.GroupBox();
             this.dgvProcessed = new System.Windows.Forms.DataGridView();
+            this.TimerFiles = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.WatcherFiles)).BeginInit();
             this.gboxIn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIn)).BeginInit();
@@ -164,6 +166,11 @@ namespace VeroneziVendas.WinForm
             this.dgvProcessed.Size = new System.Drawing.Size(438, 222);
             this.dgvProcessed.TabIndex = 0;
             // 
+            // TimerFiles
+            // 
+            this.TimerFiles.Interval = 3000;
+            this.TimerFiles.Tick += new System.EventHandler(this.TimerFiles_Tick);
+            // 
             // VeroneziVendasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -203,6 +210,7 @@ namespace VeroneziVendas.WinForm
         private System.Windows.Forms.GroupBox gboxOut;
         private System.Windows.Forms.DataGridView dgvOut;
         private System.Windows.Forms.DataGridView dgvIn;
+        private System.Windows.Forms.Timer TimerFiles;
     }
 }
 
