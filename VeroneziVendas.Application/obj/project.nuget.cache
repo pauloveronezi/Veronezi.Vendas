@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "0D2wN+elClcMuoNxKIygUBS+5DyZj/wBIYsVULOQAE0rcwfPIua4AwvSLP8ibHmJXPUgDL0unw4EZQWdQ7PUcg==",
+  "dgSpecHash": "qlr5P+MQMwb040wavRoK1syHQWicgnmPI8xA/WmDu8L2ELX5d4G8Mi2DhYFh6w2+2RnOp/9Cj+oKBJVfxSB13Q==",
   "success": true,
   "projectFilePath": "C:\\Projetos\\Veronezi.Vendas\\VeroneziVendas.Application\\VeroneziVendas.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\paulo\\.nuget\\packages\\fluentvalidation\\10.3.3\\fluentvalidation.10.3.3.nupkg.sha512"
+  ],
   "logs": []
 }

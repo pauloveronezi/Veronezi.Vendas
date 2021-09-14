@@ -29,31 +29,32 @@ namespace VeroneziVendas.WinForm
         /// </summary>
         private void InitializeComponent()
         {
-            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            this.watcherFiles = new System.IO.FileSystemWatcher();
+            ((System.ComponentModel.ISupportInitialize)(this.watcherFiles)).BeginInit();
             this.SuspendLayout();
             // 
-            // fileSystemWatcher1
+            // watcherFiles
             // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.watcherFiles.EnableRaisingEvents = true;
+            this.watcherFiles.Filter = "*.txt";
+            this.watcherFiles.SynchronizingObject = this;
             // 
             // VeroneziVendasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1001, 579);
             this.Name = "VeroneziVendasForm";
-            this.Text = "Form1";
+            this.Text = "Veronezi.Vendas";
             this.Load += new System.EventHandler(this.VeroneziVendasForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.watcherFiles)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.IO.FileSystemWatcher watcherFiles;
     }
 }
 
