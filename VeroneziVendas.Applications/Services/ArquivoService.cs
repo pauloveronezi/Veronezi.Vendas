@@ -80,7 +80,7 @@ namespace VeroneziVendas.Applications.Services
                 Nome = arquivo.Name,
                 Path = arquivo.FullPath,
                 ClienteList = _clientes,
-                VendaList = _vendas,
+                VendaList = _vendas.OrderBy(x => x.ValorVenda).ToList(),
                 VendedorList = _vendedores
             };
 
@@ -113,18 +113,14 @@ namespace VeroneziVendas.Applications.Services
         {
             var _quantidadeClientes = arquivo.ClienteList.ToList().Count;
             var _quantidadeVendedores = arquivo.VendedorList.ToList().Count;
-            var _vendaMaisCara = arquivo.VendaList
-                                        .Where(x => x.ValorVenda == arquivo.VendaList.Max(x => x.ValorVenda))
-                                        .Select(x => x.Id)
-                                        .SingleOrDefault();
-            var _somaVendas = arquivo.VendaList
-                                     .GroupBy(g => new { g.Vendedor.Name, g.ValorVenda })
+
+            var _vendaMaisCara = arquivo.VendaList.LastOrDefault().Id;
+
+            var _piorVendedor = arquivo.VendaList
+                                     .GroupBy(g => new { g.Vendedor.Name })
                                      .Select(s => new { s.Key.Name, Vendas = s.Sum(w => w.ValorVenda) })
-                                     .ToList();
-            var _piorVendedor = _somaVendas
-                                    .Where(x => x.Vendas == _somaVendas.Min(x => x.Vendas))
-                                    .Select(x => x.Name)
-                                    .SingleOrDefault();
+                                     .OrderBy(o => o.Vendas)
+                                     .FirstOrDefault().Name;
 
             var _dataOut = $"{TypeDataOut.Out001}ç{_quantidadeClientes}ç{_quantidadeVendedores}ç{_vendaMaisCara}ç{_piorVendedor}";
 
