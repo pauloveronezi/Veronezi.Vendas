@@ -338,8 +338,18 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-/VeroneziVendas.Application/obj/Debug/netcoreapp3.1/.cache
-/VeroneziVendas.WinForm/obj/Debug/netcoreapp3.1/.cache
+/VeroneziVendas.Application/obj/Debug/*
+/VeroneziVendas.Application/obj/Debug/netcoreapp3.1/*
+/VeroneziVendas.Domain/obj/Debug/*
+/VeroneziVendas.Domain/obj/Debug/netcoreapp3.1/*
+/VeroneziVendas.Domain.Helper/obj/Debug/*
+/VeroneziVendas.Domain.Helper/obj/Debug/netcoreapp3.1/*
+/VeroneziVendas.Domain.Test/obj/Debug/*
+/VeroneziVendas.Domain.Test/obj/Debug/netcoreapp3.1/*
+/VeroneziVendas.Infrastructure/obj/Debug/*
+/VeroneziVendas.Infrastructure/obj/Debug/netcoreapp3.1/*
+/VeroneziVendas.WinForm/obj/Debug/*
+/VeroneziVendas.WinForm/obj/Debug/netcoreapp3.1/*
 .vscode/solution-explorer/class.cs-template
 .vscode/solution-explorer/class.ts-template
 .vscode/solution-explorer/class.vb-template
