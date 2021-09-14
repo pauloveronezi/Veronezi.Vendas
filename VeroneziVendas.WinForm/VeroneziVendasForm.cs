@@ -29,7 +29,7 @@ namespace VeroneziVendas.WinForm
         private void watcherFiles_Created(object sender, FileSystemEventArgs e)
         {
             var _arquivo = _ServiceArquivo.Ler(e);
-            _ServiceArquivo.Processar(_arquivo);
+            _ServiceArquivo.Processar(_arquivo);            
         }
 
         private void InformarLocalArquivos()

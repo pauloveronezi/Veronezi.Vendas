@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using VeroneziVendas.Domain.Models;
 
 namespace VeroneziVendas.Applications.Interfaces
@@ -7,6 +8,8 @@ namespace VeroneziVendas.Applications.Interfaces
     {
         Arquivo Ler(FileSystemEventArgs arquivo);
 
-        void Processar(Arquivo arquivo);
+        Arquivo Salvar(Arquivo arquivo, string dataOut);
+
+        Arquivo Processar(Arquivo arquivo);
     }
 }

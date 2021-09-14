@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using VeroneziVendas.Applications.Interfaces;
-using VeroneziVendas.Domain.Models;
 
 namespace VeroneziVendas.Applications.Services
 {
@@ -49,16 +48,21 @@ namespace VeroneziVendas.Applications.Services
             }
         }
 
-        public List<string> ListarArquivos(string complementoDiretorio)
+        public DataTable ListarArquivos(string complementoDiretorio)
         {
-            var _arquivos = new List<string>();
+            var _dataTable = new DataTable();
+            _dataTable.Columns.Add("Name");
+            var _arquivos = Directory.GetFiles($"{_diretorio}{complementoDiretorio}");
 
-            foreach (var arquivo in new DirectoryInfo($"{_diretorio}{complementoDiretorio}").GetFiles())
+            for (int i = 0; i < _arquivos.Length; i++)
             {
-                _arquivos.Add(arquivo.Name);
+                FileInfo _file = new FileInfo(_arquivos[i]);
+                var _linhaDataTable = _dataTable.NewRow();
+                _linhaDataTable[0] = _file.Name;
+                _dataTable.Rows.Add(_linhaDataTable);
             }
 
-            return _arquivos;
+            return _dataTable;
         }
 
         public DirectoryInfo Recuperar()

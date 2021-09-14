@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using VeroneziVendas.Applications.Interfaces;
 using VeroneziVendas.Domain.Helper;
 using VeroneziVendas.Domain.Models;
@@ -13,9 +14,11 @@ namespace VeroneziVendas.Applications.Services
 {
     public class ArquivoService : IArquivoService
     {
-        public ArquivoService(IServiceProvider serviceProvider)
+        private readonly IDiretorioService _ServiceDiretorio;
+
+        public ArquivoService(IServiceProvider serviceProvider, IDiretorioService diretorioService)
         {
-            
+            _ServiceDiretorio = diretorioService;
         }
 
         public Arquivo Ler(FileSystemEventArgs arquivo)
@@ -85,32 +88,44 @@ namespace VeroneziVendas.Applications.Services
             return _arquivo;
         }
 
-        public void Processar(Arquivo arquivo)
+        public Arquivo Salvar(Arquivo arquivo, string dataOut)
+        {
+            var _diretorio = _ServiceDiretorio.Recuperar();
+
+            try
+            {
+                using (var fs = File.Create($"{_diretorio}\\.data\\out\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyhhmmss}out.txt")}"))
+                {
+                    byte[] info = new UTF8Encoding(true).GetBytes(dataOut);
+                    fs.Write(info, 0, info.Length);
+                }
+
+                File.Move($"{_diretorio}\\.data\\in\\{arquivo.Nome}", $"{_diretorio}\\.data\\processed\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyhhmmss}processed.txt")}");
+            }
+            catch (Exception)
+            {
+                File.Move($"{_diretorio}\\.data\\in\\{arquivo.Nome}", $"{_diretorio}\\.data\\error\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyhhmmss}error.txt")}");
+            }
+
+            return arquivo;
+        }
+
+        public Arquivo Processar(Arquivo arquivo)
         {
             var _quantidadeClientes = arquivo.ClienteList.ToList().Count;
             var _quantidadeVendedores = arquivo.VendedorList.ToList().Count;
             var _vendaMaisCara = arquivo.VendaList.Where(x => x.ValorVenda == arquivo.VendaList.Max(x => x.ValorVenda)).Select(x => x.Id).SingleOrDefault();
-            var _teste = arquivo.VendaList.GroupBy(g => new { g.Vendedor.Name, g.ValorVenda })
-                                .Select(s => new { s.Key.Name, Vendas = s.Sum(w => w.ValorVenda) }).ToList();
 
+            var _teste = arquivo.VendaList.GroupBy(g => new { g.Vendedor.Name, g.ValorVenda })
+                                .Select(s => new { s.Key.Name, Vendas = s.Sum(w => w.ValorVenda) })
+                                .ToList();
             var _piorVendedor = _teste.Where(x => x.Vendas == _teste.Min(x => x.Vendas)).Select(x => x.Name).SingleOrDefault();
 
             var _dataOut = $"{TypeDataOut.Out001}ç{_quantidadeClientes}ç{_quantidadeVendedores}ç{_vendaMaisCara}ç{_piorVendedor}";
 
-            try
-            {
-                using (var fs = File.Create(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent + "\\.data\\out\\" + arquivo.Nome.Replace(".txt", "_out.txt")))
-                {
-                    byte[] info = new UTF8Encoding(true).GetBytes(_dataOut);
-                    fs.Write(info, 0, info.Length);
-                }
+            Salvar(arquivo, _dataOut);
 
-                File.Move(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent + "\\.data\\in\\" + arquivo.Nome, Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent + "\\.data\\processed\\" + arquivo.Nome);
-            }
-            catch (Exception)
-            {
-                File.Move(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent + "\\.data\\in\\" + arquivo.Nome, Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent + "\\.data\\error\\" + arquivo.Nome);
-            }
+            return arquivo;
         }
     }
 }
