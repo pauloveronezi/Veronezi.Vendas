@@ -22,11 +22,11 @@ namespace VeroneziVendas.WinForm
         private void VeroneziVendasForm_Load(object sender, System.EventArgs e)
         {
             _ServiceDiretorio.Criar();
-            watcherFiles.Path = $"{_ServiceDiretorio.Recuperar().FullName}\\.data\\in";
+            WatcherFiles.Path = $"{_ServiceDiretorio.Recuperar().FullName}\\.data\\in";
             InformarLocalArquivos();
         }
 
-        private void watcherFiles_Created(object sender, FileSystemEventArgs e)
+        private void WatcherFiles_Created(object sender, FileSystemEventArgs e)
         {
             var _arquivo = _ServiceArquivo.Ler(e);
             _ServiceArquivo.Processar(_arquivo);            

@@ -29,7 +29,7 @@ namespace VeroneziVendas.WinForm
         /// </summary>
         private void InitializeComponent()
         {
-            this.watcherFiles = new System.IO.FileSystemWatcher();
+            this.WatcherFiles = new System.IO.FileSystemWatcher();
             this.gboxIn = new System.Windows.Forms.GroupBox();
             this.dgvIn = new System.Windows.Forms.DataGridView();
             this.dgvOut = new System.Windows.Forms.DataGridView();
@@ -38,7 +38,7 @@ namespace VeroneziVendas.WinForm
             this.dgvError = new System.Windows.Forms.DataGridView();
             this.gboxProcessed = new System.Windows.Forms.GroupBox();
             this.dgvProcessed = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.watcherFiles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WatcherFiles)).BeginInit();
             this.gboxIn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOut)).BeginInit();
@@ -49,12 +49,12 @@ namespace VeroneziVendas.WinForm
             ((System.ComponentModel.ISupportInitialize)(this.dgvProcessed)).BeginInit();
             this.SuspendLayout();
             // 
-            // watcherFiles
+            // WatcherFiles
             // 
-            this.watcherFiles.EnableRaisingEvents = true;
-            this.watcherFiles.Filter = "*.txt";
-            this.watcherFiles.SynchronizingObject = this;
-            this.watcherFiles.Created += new System.IO.FileSystemEventHandler(this.watcherFiles_Created);
+            this.WatcherFiles.EnableRaisingEvents = true;
+            this.WatcherFiles.Filter = "*.txt";
+            this.WatcherFiles.SynchronizingObject = this;
+            this.WatcherFiles.Created += new System.IO.FileSystemEventHandler(this.WatcherFiles_Created);
             // 
             // gboxIn
             // 
@@ -179,7 +179,7 @@ namespace VeroneziVendas.WinForm
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Veronezi.Vendas";
             this.Load += new System.EventHandler(this.VeroneziVendasForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.watcherFiles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WatcherFiles)).EndInit();
             this.gboxIn.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvIn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOut)).EndInit();
@@ -194,7 +194,7 @@ namespace VeroneziVendas.WinForm
 
         #endregion
 
-        private System.IO.FileSystemWatcher watcherFiles;
+        private System.IO.FileSystemWatcher WatcherFiles;
         private System.Windows.Forms.GroupBox gboxIn;
         private System.Windows.Forms.GroupBox gboxProcessed;
         private System.Windows.Forms.DataGridView dgvProcessed;
