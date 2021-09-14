@@ -338,11 +338,8 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-/src/UPP.Services.Unimed/.config
-/src/UPP.Services.Prestador/.config
-/src/UPP.Services.Bitrix/.config/dotnet-tools.json
-/src/UPP.Services.IntegracaoProntuarioEletronico/.config
-/src/UPP.Services.AreaRestrita.Cooperados/.config/dotnet-tools.json
+/VeroneziVendas.Application/obj/Debug/netcoreapp3.1/.cache
+/VeroneziVendas.WinForm/obj/Debug/netcoreapp3.1/.cache
 .vscode/solution-explorer/class.cs-template
 .vscode/solution-explorer/class.ts-template
 .vscode/solution-explorer/class.vb-template
