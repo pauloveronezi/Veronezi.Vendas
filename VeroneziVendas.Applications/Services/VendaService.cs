@@ -24,6 +24,7 @@ namespace VeroneziVendas.Applications.Services
                 Vendedor = new Vendedor { Name = linhaSplit[3] ?? string.Empty },
             };
 
+            //verificando se a entidade esta de acordo com as regras do validator
             _vendas.EhValido();
 
             return _vendas;

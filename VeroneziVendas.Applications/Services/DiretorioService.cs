@@ -14,6 +14,7 @@ namespace VeroneziVendas.Applications.Services
 
         }
 
+        //metodo para criar os diretorios de entrada e saida de arquivos
         public void Criar()
         {
             var _diretorioData = $"{_diretorio.FullName}\\.data";
@@ -36,6 +37,7 @@ namespace VeroneziVendas.Applications.Services
             }
         }
 
+        //metodo para listar arquivos do diretorio
         public DataTable ListarArquivos(string complementoDiretorio)
         {
             var _dataTable = new DataTable();
@@ -53,6 +55,7 @@ namespace VeroneziVendas.Applications.Services
             return _dataTable;
         }
 
+        //meotodo para recuperar o diretorio padrao (pai) dos arquivos de entrada e saida
         public DirectoryInfo Recuperar()
         {
             return _diretorio;

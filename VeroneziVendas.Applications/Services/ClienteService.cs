@@ -22,6 +22,7 @@ namespace VeroneziVendas.Applications.Services
                 BusinessArea = linhaSplit[3] ?? string.Empty,
             };
 
+            //verificando se a entidade esta de acordo com as regras do validator
             _cliente.EhValido();
 
             return _cliente;

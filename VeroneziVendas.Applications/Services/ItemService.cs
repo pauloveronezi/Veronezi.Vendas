@@ -30,6 +30,7 @@ namespace VeroneziVendas.Applications.Services
                     Price = Convert.ToDecimal((_itemSpit[2] ?? string.Empty).Replace(",", "."), new CultureInfo("en-US")),
                 };
 
+                //verificando se a entidade esta de acordo com as regras do validator
                 _item.EhValido();
 
                 _itens.Add(_item);

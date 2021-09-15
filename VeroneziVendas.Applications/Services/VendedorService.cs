@@ -23,6 +23,7 @@ namespace VeroneziVendas.Applications.Services
                 Salary = Convert.ToDecimal((linhaSplit[3] ?? "0").Replace(",", "."), new CultureInfo("en-US")),
             };
 
+            //verificando se a entidade esta de acordo com as regras do validator
             _vendedor.EhValido();
 
             return _vendedor;
