@@ -7,7 +7,8 @@ namespace VeroneziVendas.Domain.Validators
     {
         public VendaValidator()
         {
-
+            RuleFor(x => x.Id).NotNull().WithMessage("Id é obrigatório")
+                              .GreaterThan(0).WithMessage("Id deve ser maior que 0 (zero)");
         }
     }
 }
