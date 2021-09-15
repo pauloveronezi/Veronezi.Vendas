@@ -22,9 +22,10 @@ namespace VeroneziVendas.WinForm
 
         private void VeroneziVendasForm_Load(object sender, System.EventArgs e)
         {
-            _ServiceDiretorio.Criar();
-            WatcherFiles.Path = $"{_ServiceDiretorio.Recuperar().FullName}\\.data\\in";
+            _ServiceDiretorio.Criar();            
             TimerFiles.Start();
+            WatcherFiles.Path = $"{_ServiceDiretorio.Recuperar().FullName}\\.data\\in";
+            WatcherFiles.EnableRaisingEvents = true;
         }
 
         private void WatcherFiles_Created(object sender, FileSystemEventArgs e)

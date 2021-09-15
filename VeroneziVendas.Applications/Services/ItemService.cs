@@ -19,16 +19,20 @@ namespace VeroneziVendas.Applications.Services
         {
             var _itens = new List<Item>();
 
-            foreach (var _item in linhaSplit)
+            foreach (var _linha in linhaSplit)
             {
-                var _itemSpit = _item.Split("-").ToList();
+                var _itemSpit = _linha.Split("-").ToList();
 
-                _itens.Add(new Item
+                var _item = new Item
                 {
-                    Id = Convert.ToInt32(_itemSpit[0]),
-                    Quatity = Convert.ToInt32(_itemSpit[1]),
-                    Price = Convert.ToDecimal(_itemSpit[2].Replace(",", "."), new CultureInfo("en-US")),
-                });
+                    Id = Convert.ToInt32(_itemSpit[0] ?? "0"),
+                    Quatity = Convert.ToInt32(_itemSpit[1] ?? "0"),
+                    Price = Convert.ToDecimal((_itemSpit[2] ?? string.Empty).Replace(",", "."), new CultureInfo("en-US")),
+                };
+
+                _item.EhValido();
+
+                _itens.Add(_item);
             }
 
             return _itens;

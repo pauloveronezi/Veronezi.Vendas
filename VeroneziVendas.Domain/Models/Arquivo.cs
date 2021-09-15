@@ -2,7 +2,7 @@
 
 namespace VeroneziVendas.Domain.Models
 {
-    public class Arquivo
+    public class Arquivo : Entity
     {
         public string Nome { get; set; }
 

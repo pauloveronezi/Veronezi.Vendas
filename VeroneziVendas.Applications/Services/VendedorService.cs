@@ -18,10 +18,12 @@ namespace VeroneziVendas.Applications.Services
         {
             var _vendedor = new Vendedor
             {
-                CPF = StringHelper.RemoveSimbolos(linhaSplit[1]),
-                Name = linhaSplit[2],
-                Salary = Convert.ToDecimal(linhaSplit[3].Replace(",", "."), new CultureInfo("en-US")),
+                CPF = StringHelper.RemoveSimbolos(linhaSplit[1] ?? "0"),
+                Name = linhaSplit[2] ?? string.Empty,
+                Salary = Convert.ToDecimal((linhaSplit[3] ?? "0").Replace(",", "."), new CultureInfo("en-US")),
             };
+
+            _vendedor.EhValido();
 
             return _vendedor;
         }

@@ -17,10 +17,12 @@ namespace VeroneziVendas.Applications.Services
         {
             var _cliente = new Cliente
             {
-                CNPJ = StringHelper.RemoveSimbolos(linhaSplit[1]),
-                Name = linhaSplit[2],
-                BusinessArea = linhaSplit[3],
+                CNPJ = StringHelper.RemoveSimbolos(linhaSplit[1] ?? "0"),
+                Name = linhaSplit[2] ?? string.Empty,
+                BusinessArea = linhaSplit[3] ?? string.Empty,
             };
+
+            _cliente.EhValido();
 
             return _cliente;
         }
