@@ -14,10 +14,19 @@ namespace VeroneziVendas.Applications.Services
     public class ArquivoService : IArquivoService
     {
         private readonly IDiretorioService _ServiceDiretorio;
+        private readonly IVendedorService _ServiceVendedor;
+        private readonly IClienteService _ServiceCliente;
+        private readonly IVendaService _ServiceVenda;
 
-        public ArquivoService(IServiceProvider serviceProvider, IDiretorioService diretorioService)
+        public ArquivoService(IDiretorioService diretorioService,
+                              IVendedorService vendedorService,
+                              IClienteService clienteService,
+                              IVendaService vendaService)
         {
             _ServiceDiretorio = diretorioService;
+            _ServiceVendedor = vendedorService;
+            _ServiceCliente = clienteService;
+            _ServiceVenda = vendaService;
         }
 
         public Arquivo Ler(FileSystemEventArgs arquivo)
@@ -32,59 +41,21 @@ namespace VeroneziVendas.Applications.Services
 
                 if ((TypeDataIn)Convert.ToInt32(_linhaSplit[0]) == TypeDataIn.Vendedor)
                 {
-                    _vendedores.Add(new Vendedor
-                    {
-                        CPF = StringHelper.RemoveSimbolos(_linhaSplit[1]),
-                        Name = _linhaSplit[2],
-                        Salary = Convert.ToDecimal(_linhaSplit[3].Replace(",", "."), new CultureInfo("en-US")),
-                    });
+                    _vendedores.Add(_ServiceVendedor.Criar(_linhaSplit));
                 }
 
                 if ((TypeDataIn)Convert.ToInt32(_linhaSplit[0]) == TypeDataIn.Cliente)
                 {
-                    _clientes.Add(new Cliente
-                    {
-                        CNPJ = StringHelper.RemoveSimbolos(_linhaSplit[1]),
-                        Name = _linhaSplit[2],
-                        BusinessArea = _linhaSplit[3],
-                    });
+                    _clientes.Add(_ServiceCliente.Criar(_linhaSplit));
                 }
 
                 if ((TypeDataIn)Convert.ToInt32(_linhaSplit[0]) == TypeDataIn.Venda)
                 {
-                    var _itens = new List<Item>();
-
-                    foreach (var _item in _linhaSplit[2].Replace("[", "").Replace("]", "").Split(",").ToList())
-                    {
-                        var _itemSpit = _item.Split("-").ToList();
-
-                        _itens.Add(new Item
-                        {
-                            Id = Convert.ToInt32(_itemSpit[0]),
-                            Quatity = Convert.ToInt32(_itemSpit[1]),
-                            Price = Convert.ToDecimal(_itemSpit[2].Replace(",", "."), new CultureInfo("en-US")),
-                        });
-                    }
-
-                    _vendas.Add(new Venda
-                    {
-                        Id = Convert.ToInt32(_linhaSplit[1]),
-                        ItemList = _itens,
-                        Vendedor = new Vendedor { Name = _linhaSplit[3] },
-                    });
+                    _vendas.Add(_ServiceVenda.Criar(_linhaSplit));
                 }
             }
 
-            var _arquivo = new Arquivo
-            {
-                Nome = arquivo.Name,
-                Path = arquivo.FullPath,
-                ClienteList = _clientes,
-                VendaList = _vendas.OrderBy(x => x.ValorVenda).ToList(),
-                VendedorList = _vendedores
-            };
-
-            return _arquivo;
+            return Criar(_clientes, _vendedores, _vendas, arquivo);
         }
 
         public Arquivo Salvar(Arquivo arquivo, string dataOut)
@@ -127,6 +98,20 @@ namespace VeroneziVendas.Applications.Services
             Salvar(arquivo, _dataOut);
 
             return arquivo;
+        }
+
+        public Arquivo Criar(List<Cliente> clientes, List<Vendedor> vendedores, List<Venda> vendas, FileSystemEventArgs arquivo = null)
+        {
+            var _arquivo = new Arquivo
+            {
+                Nome = arquivo.Name,
+                Path = arquivo.FullPath,
+                ClienteList = clientes,
+                VendedorList = vendedores,
+                VendaList = vendas.OrderBy(x => x.ValorVenda).ToList(),
+            };
+
+            return _arquivo;
         }
     }
 }
