@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using VeroneziVendas.Domain.Validators;
 
 namespace VeroneziVendas.Domain.Models
 {
@@ -16,5 +17,7 @@ namespace VeroneziVendas.Domain.Models
                 return ItemList?.Sum(x => x.Price) ?? 0;
             }            
         }
+
+        public override bool EhValido() => Validate(this, new VendaValidator());
     }
 }

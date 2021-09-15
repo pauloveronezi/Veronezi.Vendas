@@ -19,19 +19,39 @@ namespace VeroneziVendas.Applications.Services
         {
             var _itens = new List<Item>();
 
-            foreach (var _item in linhaSplit)
+            foreach (var _linha in linhaSplit)
             {
-                var _itemSpit = _item.Split("-").ToList();
+                var _itemSpit = _linha.Split("-").ToList();
 
-                _itens.Add(new Item
+                var _item = new Item
                 {
-                    Id = Convert.ToInt32(_itemSpit[0]),
-                    Quatity = Convert.ToInt32(_itemSpit[1]),
-                    Price = Convert.ToDecimal(_itemSpit[2].Replace(",", "."), new CultureInfo("en-US")),
-                });
+                    Id = Convert.ToInt32(_itemSpit[0] ?? "0"),
+                    Quatity = Convert.ToInt32(_itemSpit[1] ?? "0"),
+                    Price = Convert.ToDecimal((_itemSpit[2] ?? string.Empty).Replace(",", "."), new CultureInfo("en-US")),
+                };
+
+                //verificando se a entidade esta de acordo com as regras do validator
+                _item.EhValido();
+
+                _itens.Add(_item);
             }
 
             return _itens;
+        }
+
+        public string Errors(IEnumerable<Item> itens)
+        {
+            var _errors = string.Empty;
+
+            foreach (var item in itens)
+            {
+                foreach (var error in item.ValidationResult?.Errors)
+                {
+                    _errors = string.Concat(_errors, $"{error.ErrorMessage}{Environment.NewLine}");
+                }
+            }
+
+            return _errors;
         }
     }
 }

@@ -6,5 +6,7 @@ namespace VeroneziVendas.Applications.Interfaces
     public interface IVendedorService
     {
         Vendedor Criar(List<string> linhaSplit);
+
+        string Errors(IEnumerable<Vendedor> vendedores);
     }
 }

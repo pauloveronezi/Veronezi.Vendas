@@ -22,9 +22,10 @@ namespace VeroneziVendas.WinForm
 
         private void VeroneziVendasForm_Load(object sender, System.EventArgs e)
         {
-            _ServiceDiretorio.Criar();
-            WatcherFiles.Path = $"{_ServiceDiretorio.Recuperar().FullName}\\.data\\in";
+            _ServiceDiretorio.Criar();            
             TimerFiles.Start();
+            WatcherFiles.Path = $"{_ServiceDiretorio.Recuperar().FullName}\\.data\\in";
+            WatcherFiles.EnableRaisingEvents = true;
         }
 
         private void WatcherFiles_Created(object sender, FileSystemEventArgs e)
@@ -43,8 +44,6 @@ namespace VeroneziVendas.WinForm
         {
             dgvIn.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\in");
             dgvOut.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\out");
-            dgvError.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\error");
-            dgvProcessed.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\processed");
         }        
     }
 }

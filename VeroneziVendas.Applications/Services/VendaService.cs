@@ -19,12 +19,32 @@ namespace VeroneziVendas.Applications.Services
         {
             var _vendas = new Venda
             {
-                Id = Convert.ToInt32(linhaSplit[1]),
-                ItemList = _ServiceItem.Criar(linhaSplit[2].Replace("[", "").Replace("]", "").Split(",").ToList()),
-                Vendedor = new Vendedor { Name = linhaSplit[3] },
+                Id = Convert.ToInt32(linhaSplit[1] ?? "0"),
+                ItemList = _ServiceItem.Criar((linhaSplit[2] ?? "0-0-0").Replace("[", "").Replace("]", "").Split(",").ToList()),
+                Vendedor = new Vendedor { Name = linhaSplit[3] ?? string.Empty },
             };
+
+            //verificando se a entidade esta de acordo com as regras do validator
+            _vendas.EhValido();
 
             return _vendas;
         }
-    }
+
+        public string Errors(IEnumerable<Venda> vendas)
+        {
+            var _errors = string.Empty;
+
+            foreach (var _venda in vendas)
+            {
+                _errors = string.Concat(_errors, _ServiceItem.Errors(_venda.ItemList));
+
+                foreach (var error in _venda.ValidationResult?.Errors)
+                {
+                    _errors = string.Concat(_errors, $"{error.ErrorMessage}{Environment.NewLine}");
+                }
+            }
+
+            return _errors;
+        }
+    }    
 }

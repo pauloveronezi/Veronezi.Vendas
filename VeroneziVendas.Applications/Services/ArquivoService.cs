@@ -29,6 +29,7 @@ namespace VeroneziVendas.Applications.Services
             _ServiceVenda = vendaService;
         }
 
+        //metodo utilizado para ler os dados do arquivo, separa-los e transforma-los em entidades
         public Arquivo Ler(FileSystemEventArgs arquivo)
         {
             var _vendedores = new List<Vendedor>();
@@ -58,49 +59,8 @@ namespace VeroneziVendas.Applications.Services
             return Criar(_clientes, _vendedores, _vendas, arquivo);
         }
 
-        public Arquivo Salvar(Arquivo arquivo, string dataOut)
-        {
-            var _diretorio = _ServiceDiretorio.Recuperar();
-
-            try
-            {
-                using (var fs = File.Create($"{_diretorio}\\.data\\out\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyHHmmss}out.txt")}"))
-                {
-                    byte[] info = new UTF8Encoding(true).GetBytes(dataOut);
-                    fs.Write(info, 0, info.Length);
-                }
-
-                File.Move($"{_diretorio}\\.data\\in\\{arquivo.Nome}", $"{_diretorio}\\.data\\processed\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyHHmmss}processed.txt")}");
-            }
-            catch (Exception)
-            {
-                File.Move($"{_diretorio}\\.data\\in\\{arquivo.Nome}", $"{_diretorio}\\.data\\error\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyhhmmss}error.txt")}");
-            }
-
-            return arquivo;
-        }
-
-        public Arquivo Processar(Arquivo arquivo)
-        {
-            var _quantidadeClientes = arquivo.ClienteList.ToList().Count;
-            var _quantidadeVendedores = arquivo.VendedorList.ToList().Count;
-
-            var _vendaMaisCara = arquivo.VendaList.LastOrDefault().Id;
-
-            var _piorVendedor = arquivo.VendaList
-                                     .GroupBy(g => new { g.Vendedor.Name })
-                                     .Select(s => new { s.Key.Name, Vendas = s.Sum(w => w.ValorVenda) })
-                                     .OrderBy(o => o.Vendas)
-                                     .FirstOrDefault().Name;
-
-            var _dataOut = $"{TypeDataOut.Out001}ç{_quantidadeClientes}ç{_quantidadeVendedores}ç{_vendaMaisCara}ç{_piorVendedor}";
-
-            Salvar(arquivo, _dataOut);
-
-            return arquivo;
-        }
-
-        public Arquivo Criar(List<Cliente> clientes, List<Vendedor> vendedores, List<Venda> vendas, FileSystemEventArgs arquivo = null)
+        //nesse metodo crio a entidade arquivo
+        public Arquivo Criar(List<Cliente> clientes, List<Vendedor> vendedores, IEnumerable<Venda> vendas, FileSystemEventArgs arquivo = null)
         {
             var _arquivo = new Arquivo
             {
@@ -111,7 +71,64 @@ namespace VeroneziVendas.Applications.Services
                 VendaList = vendas.OrderBy(x => x.ValorVenda).ToList(),
             };
 
+            _arquivo = ListarErrors(_arquivo);
+
             return _arquivo;
+        }
+
+        /*
+         * metodo utilizado para retirar os dados requisitados pelo cliente no arquivo de saida (out):
+         * Quantidade de clientes no arquivo de entrada;
+         * Quantidade de vendedores no arquivo de entrada;
+         * ID da venda mais cara;
+         * O pior vendedor. 
+         */
+        public Arquivo Processar(Arquivo arquivo)
+        {
+            var _quantidadeClientes = arquivo.ClienteList?.ToList().Count;
+            var _quantidadeVendedores = arquivo.VendedorList?.ToList().Count;
+
+            var _vendaMaisCara = arquivo.VendaList?.LastOrDefault().Id;
+
+            var _piorVendedor = arquivo.VendaList?
+                                     .GroupBy(g => new { g.Vendedor.Name })
+                                     .Select(s => new { s.Key.Name, Vendas = s.Sum(w => w.ValorVenda) })
+                                     .OrderBy(o => o.Vendas)
+                                     .FirstOrDefault().Name;
+
+            //caso tenha erros de entidade (validator), os dados do arquivo de saida (out) serao os erros
+            //caso contrario serao os dados requisitados pelo cliente
+            var _dataOut = string.IsNullOrWhiteSpace(arquivo.Errors) ?
+                                 $"{TypeDataOut.Out001}ç{_quantidadeClientes}ç{_quantidadeVendedores}ç{_vendaMaisCara}ç{_piorVendedor}" :
+                                 arquivo.Errors;
+
+            Salvar(arquivo, _dataOut);
+
+            return arquivo;
+        }
+
+        //nesse metodo crio o arquivo no diretorio de saida
+        public Arquivo Salvar(Arquivo arquivo, string dataOut)
+        {
+            var _diretorio = _ServiceDiretorio.Recuperar();
+
+            using (var fs = File.Create($"{_diretorio}\\.data\\out\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyHHmmss}out.txt")}"))
+            {
+                byte[] info = new UTF8Encoding(true).GetBytes(dataOut);
+                fs.Write(info, 0, info.Length);
+            }
+
+            return arquivo;
+        }        
+
+        //nesse metodo busco os erros, caso tenha
+        private Arquivo ListarErrors(Arquivo arquivo)
+        {
+            arquivo.Errors += _ServiceVendedor.Errors(arquivo.VendedorList);
+            arquivo.Errors += _ServiceCliente.Errors(arquivo.ClienteList);
+            arquivo.Errors += _ServiceVenda.Errors(arquivo.VendaList);
+
+            return arquivo;
         }
     }
 }
