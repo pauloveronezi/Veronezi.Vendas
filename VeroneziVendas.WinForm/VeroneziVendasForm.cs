@@ -44,8 +44,6 @@ namespace VeroneziVendas.WinForm
         {
             dgvIn.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\in");
             dgvOut.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\out");
-            dgvError.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\error");
-            dgvProcessed.DataSource = _ServiceDiretorio.ListarArquivos("\\.data\\processed");
         }        
     }
 }

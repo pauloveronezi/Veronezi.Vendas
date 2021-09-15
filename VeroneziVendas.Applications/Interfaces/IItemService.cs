@@ -6,5 +6,7 @@ namespace VeroneziVendas.Applications.Interfaces
     public interface IItemService
     {
         IEnumerable<Item> Criar(List<string> linhaSplit);
+
+        string Errors(IEnumerable<Item> itens);
     }
 }

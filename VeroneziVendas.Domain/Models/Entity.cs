@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
+using System;
+using System.Collections.Generic;
 
 namespace VeroneziVendas.Domain.Models
 {

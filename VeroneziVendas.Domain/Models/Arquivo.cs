@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VeroneziVendas.Domain.Validators;
 
 namespace VeroneziVendas.Domain.Models
 {
@@ -7,6 +8,8 @@ namespace VeroneziVendas.Domain.Models
         public string Nome { get; set; }
 
         public string Path { get; set; }
+
+        public string Errors { get; set; }
 
         public IEnumerable<Vendedor> VendedorList { get; set; }
 

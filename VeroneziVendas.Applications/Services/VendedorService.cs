@@ -27,5 +27,20 @@ namespace VeroneziVendas.Applications.Services
 
             return _vendedor;
         }
+
+        public string Errors(IEnumerable<Vendedor> vendedores)
+        {
+            var _errors = string.Empty;
+
+            foreach (var item in vendedores)
+            {
+                foreach (var error in item.ValidationResult?.Errors)
+                {
+                    _errors = string.Concat(_errors, $"{error.ErrorMessage}{Environment.NewLine}");
+                }
+            }
+
+            return _errors;
+        }
     }
 }

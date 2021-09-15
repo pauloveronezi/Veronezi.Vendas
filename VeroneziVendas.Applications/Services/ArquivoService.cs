@@ -62,19 +62,10 @@ namespace VeroneziVendas.Applications.Services
         {
             var _diretorio = _ServiceDiretorio.Recuperar();
 
-            try
+            using (var fs = File.Create($"{_diretorio}\\.data\\out\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyHHmmss}out.txt")}"))
             {
-                using (var fs = File.Create($"{_diretorio}\\.data\\out\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyHHmmss}out.txt")}"))
-                {
-                    byte[] info = new UTF8Encoding(true).GetBytes(dataOut);
-                    fs.Write(info, 0, info.Length);
-                }
-
-                File.Move($"{_diretorio}\\.data\\in\\{arquivo.Nome}", $"{_diretorio}\\.data\\processed\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyHHmmss}processed.txt")}");
-            }
-            catch (Exception)
-            {
-                File.Move($"{_diretorio}\\.data\\in\\{arquivo.Nome}", $"{_diretorio}\\.data\\error\\{arquivo.Nome.Replace(".txt", $"_{DateTime.Now:ddMMyyyyhhmmss}error.txt")}");
+                byte[] info = new UTF8Encoding(true).GetBytes(dataOut);
+                fs.Write(info, 0, info.Length);
             }
 
             return arquivo;
@@ -82,25 +73,27 @@ namespace VeroneziVendas.Applications.Services
 
         public Arquivo Processar(Arquivo arquivo)
         {
-            var _quantidadeClientes = arquivo.ClienteList.ToList().Count;
-            var _quantidadeVendedores = arquivo.VendedorList.ToList().Count;
+            var _quantidadeClientes = arquivo.ClienteList?.ToList().Count;
+            var _quantidadeVendedores = arquivo.VendedorList?.ToList().Count;
 
-            var _vendaMaisCara = arquivo.VendaList.LastOrDefault().Id;
+            var _vendaMaisCara = arquivo.VendaList?.LastOrDefault().Id;
 
-            var _piorVendedor = arquivo.VendaList
+            var _piorVendedor = arquivo.VendaList?
                                      .GroupBy(g => new { g.Vendedor.Name })
                                      .Select(s => new { s.Key.Name, Vendas = s.Sum(w => w.ValorVenda) })
                                      .OrderBy(o => o.Vendas)
                                      .FirstOrDefault().Name;
 
-            var _dataOut = $"{TypeDataOut.Out001}ç{_quantidadeClientes}ç{_quantidadeVendedores}ç{_vendaMaisCara}ç{_piorVendedor}";
+            var _dataOut = string.IsNullOrWhiteSpace(arquivo.Errors) ?
+                                 $"{TypeDataOut.Out001}ç{_quantidadeClientes}ç{_quantidadeVendedores}ç{_vendaMaisCara}ç{_piorVendedor}" :
+                                 arquivo.Errors;
 
             Salvar(arquivo, _dataOut);
 
             return arquivo;
         }
 
-        public Arquivo Criar(List<Cliente> clientes, List<Vendedor> vendedores, List<Venda> vendas, FileSystemEventArgs arquivo = null)
+        public Arquivo Criar(List<Cliente> clientes, List<Vendedor> vendedores, IEnumerable<Venda> vendas, FileSystemEventArgs arquivo = null)
         {
             var _arquivo = new Arquivo
             {
@@ -108,10 +101,21 @@ namespace VeroneziVendas.Applications.Services
                 Path = arquivo.FullPath,
                 ClienteList = clientes,
                 VendedorList = vendedores,
-                VendaList = vendas.OrderBy(x => x.ValorVenda).ToList(),
+                VendaList = vendas.OrderBy(x => x.ValorVenda).ToList(),                
             };
 
+            _arquivo = ListarErrors(_arquivo);
+
             return _arquivo;
+        }
+
+        private Arquivo ListarErrors(Arquivo arquivo)
+        {
+            arquivo.Errors += _ServiceVendedor.Errors(arquivo.VendedorList);
+            arquivo.Errors += _ServiceCliente.Errors(arquivo.ClienteList);
+            arquivo.Errors += _ServiceVenda.Errors(arquivo.VendaList);
+
+            return arquivo;
         }
     }
 }

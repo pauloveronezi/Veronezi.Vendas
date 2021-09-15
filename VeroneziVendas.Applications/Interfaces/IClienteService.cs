@@ -6,5 +6,7 @@ namespace VeroneziVendas.Applications.Interfaces
     public interface IClienteService
     {
         Cliente Criar(List<string> linhaSplit);
+
+        string Errors(IEnumerable<Cliente> clientes);
     }
 }
