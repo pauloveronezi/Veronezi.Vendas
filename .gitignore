@@ -360,3 +360,4 @@ healthchecksdb
 .vscode/solution-explorer/template-list.json
 .vscode/solution-explorer/template-parameters.js
 *.cache
+*.cache
